@@ -9,6 +9,8 @@ if (!("NODE_ENV" in process.env)) {
 }
 
 // Muat konfigurasi di folder configs
+// Warning: karena impornya bersifat dinamis, typescript tidak melakukan type-checking
+// Mungkin dapat berpengaruh pada produktivitas
 const configs = loadModules(__dirname);
 
 // Ekspor
