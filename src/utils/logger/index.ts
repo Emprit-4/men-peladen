@@ -3,9 +3,9 @@ import { join as joinPath, resolve as resolvePath } from "path";
 import configs from "../../configs";
 
 // types
-import { Logger as L } from "winston";
+import { Logger } from "winston";
 
-const loggerInstances: Record<string, L> = {};
+const loggerInstances: Record<string, Logger> = {};
 const fileNames = Object.keys(configs.logger.fileNames);
 
 // Cari transpor dengan nama terpanjang
