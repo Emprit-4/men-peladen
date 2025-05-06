@@ -6,14 +6,15 @@ const { HTTPReqLog } = logger;
 // Atur format
 const format = process.env.NODE_ENV === "development" ? "dev" : "combined";
 
-const stream = {
-    write(msg: string) {
-        HTTPReqLog.info(msg.trim());
-    },
-};
-
+// Handlernya diubah ke handler bawaan server ini
 function RequestLogger() {
-    return morgan(format, { stream });
+    return morgan(format, {
+        stream: {
+            write(msg: string) {
+                HTTPReqLog.info(msg.trim());
+            },
+        },
+    });
 }
 
 // Ekspor

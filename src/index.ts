@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 
 // Bersihkan layar konsol
-process.stdout.write("\x1Bc");
+// process.stdout.write("\x1Bc");
 
 // Impor modul lain
 import configs from "./configs";
@@ -29,7 +29,7 @@ app.listen(configs.server.port, configs.server.address, () => {
     ServerLog.info("Server berjalan!");
 
     // Jika dalam development, tampilkan alamat lokal IP yang mungkin
-    const addresses = getLocalIPAddresses();
+    const addresses = getLocalIPAddresses(configs.server.port);
     if (process.env.NODE_ENV === "development" && addresses.length !== 0) {
         ServerLog.debug(`Alamat lokal yang mungkin:${addresses.join(",")}`);
     }

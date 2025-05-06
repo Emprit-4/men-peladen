@@ -1,16 +1,22 @@
 import chalk from "chalk";
 import { format } from "winston";
 
+const dev = process.env.NODE_ENV === "development";
+
 // types
-/** Konfigurasi internal untuk logger */
+import { ChalkInstance } from "chalk";
+import {
+    ConsoleTransportOptions,
+    FileTransportOptions,
+} from "winston/lib/winston/transports";
+
+// Untuk konfigurasi internal
 export interface LoggerTweaks {
     prepad: number;
 }
 
-const dev = process.env.NODE_ENV === "development";
-
 // Mengatur warna-warna yang akan digunakan dalam logging console
-const colors: Record<string, typeof chalk> = {
+const colors: Record<string, ChalkInstance> = {
     error: chalk.red,
     warn: chalk.yellow,
     info: chalk.blue,
@@ -20,7 +26,6 @@ const colors: Record<string, typeof chalk> = {
 // Mengatur bentuk output
 function simple(tweaks: LoggerTweaks) {
     return format.printf((info): string => {
-        // return chalk[colors[info.level] as keyof Chalk];
         return (
             colors[info.level].bold("\u25A0") +
             colors[info.level].bold.underline(`[${info.label}]`) +
@@ -33,21 +38,20 @@ function simple(tweaks: LoggerTweaks) {
 // Opsi untuk console stream
 // Logger console dibuat sesederhana mungkin untuk meningkatkan keterbacaan
 function createConsoleOptions(name: string, tweaks: LoggerTweaks) {
-    return {
+    return <ConsoleTransportOptions>{
         format: format.combine(
-            // options.colors,
             format.label({ label: name, message: false }),
             format.errors({ stack: true }),
             simple(tweaks)
         ),
-        handleExceptions: false,
+        handleExceptions: true,
         level: dev ? "debug" : "info",
     };
 }
 
 // Opsi untuk file stream
 function createFileOptions(filePath: string) {
-    return {
+    return <FileTransportOptions>{
         // atau ini
         format: format.combine(
             format.timestamp(),
