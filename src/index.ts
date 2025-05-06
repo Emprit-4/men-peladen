@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 
 // Bersihkan layar konsol
-// process.stdout.write("\x1Bc");
+process.stdout.write("\x1Bc");
 
 // Impor modul lain
 import configs from "./configs";

@@ -44,7 +44,7 @@ function createConsoleOptions(name: string, tweaks: LoggerTweaks) {
             format.errors({ stack: true }),
             simple(tweaks)
         ),
-        handleExceptions: true,
+        handleExceptions: false,
         level: dev ? "debug" : "info",
     };
 }
