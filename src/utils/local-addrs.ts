@@ -1,18 +1,19 @@
 import { NetworkInterfaceInfo, networkInterfaces } from "os";
-import configs from "../configs";
 
 // Mencari alamat lokal yang mungkin dapat diakses
-function getLocalIPAddresses() {
+// Dikeluarkan dalam format http://{ip}:{port}
+function getLocalIPAddresses(port: number) {
     const nets = networkInterfaces();
     const netsKey = Object.keys(nets);
 
+    // Cek apakah tidak ada alamat yang tersedia
     if (netsKey.length === 0) {
         return [];
     }
 
-    // Proses mencari alamat lokal yang mungkin
     const addresses = [];
 
+    // Proses mencari alamat lokal yang mungkin
     for (let i = 0, len = netsKey.length; i < len; i += 1) {
         // Nggak mungkin undefined
         const net = <NetworkInterfaceInfo[]>nets[netsKey[i]];
@@ -23,18 +24,11 @@ function getLocalIPAddresses() {
         });
 
         if (localAddress) {
-            addresses.push(localAddress.address);
+            addresses.push(` http://${localAddress.address}:${port}`);
         }
     }
 
-    // Ubah ke bentuk tulisan yang bermanfaat
-    const text = [];
-
-    for (let i = 0; i < addresses.length; ++i) {
-        text.push(` http://${addresses[i]}:${configs.server.port}`);
-    }
-
-    return text;
+    return addresses;
 }
 
 export default getLocalIPAddresses;
