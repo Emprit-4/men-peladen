@@ -4,7 +4,6 @@ const MockSchema = new Schema({
     mockString: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
     },
 
