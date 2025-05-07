@@ -7,7 +7,7 @@ const { HTTPReqLog } = logger;
 const format = process.env.NODE_ENV === "development" ? "dev" : "combined";
 
 // Handlernya diubah ke handler bawaan server ini
-function RequestLogger() {
+function requestLogger() {
     return morgan(format, {
         stream: {
             write(msg: string) {
@@ -18,4 +18,4 @@ function RequestLogger() {
 }
 
 // Ekspor
-export default RequestLogger;
+export default requestLogger;

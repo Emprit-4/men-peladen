@@ -27,7 +27,7 @@ const colors: Record<string, ChalkInstance> = {
 function simple(tweaks: LoggerTweaks) {
     return format.printf((info): string => {
         return (
-            colors[info.level].bold("\u25A0") +
+            colors[info.level].bold("\u25A0 ") +
             colors[info.level].bold.underline(`[${info.label}]`) +
             " ".repeat(tweaks.prepad) +
             info.message
