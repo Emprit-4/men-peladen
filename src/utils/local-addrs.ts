@@ -6,15 +6,10 @@ function getLocalIPAddresses(port: number) {
     const nets = networkInterfaces();
     const netsKey = Object.keys(nets);
 
-    // Cek apakah tidak ada alamat yang tersedia
-    if (netsKey.length === 0) {
-        return [];
-    }
-
     const addresses = [];
 
     // Proses mencari alamat lokal yang mungkin
-    for (let i = 0, len = netsKey.length; i < len; i += 1) {
+    for (let i = 0; i < netsKey.length; i += 1) {
         // Nggak mungkin undefined
         const net = <NetworkInterfaceInfo[]>nets[netsKey[i]];
 

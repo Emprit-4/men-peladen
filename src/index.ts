@@ -10,7 +10,7 @@ import cors from "cors";
 // Impor modul lain
 import getLocalIPAddresses from "./utils/local-addrs";
 import db from "./utils/db-connect";
-import { modelsCount } from "./models";
+import models from "./models";
 
 // Impor logger
 import loggerInstances from "./utils/logger";
@@ -44,5 +44,5 @@ app.listen(+process.env.PORT, process.env.ADDR, () => {
     }
 
     // Muat infoh lainnya
-    DBLog.debug(`Termuat ${modelsCount} model`);
+    DBLog.debug(`Termuat ${models.count} model`);
 });

@@ -6,12 +6,12 @@ import configs from "../../configs";
 import { Logger } from "winston";
 
 const loggerInstances: Record<string, Logger> = {};
-const fileNames = Object.keys(configs.logger.fileNames);
 
 // Cari transpor dengan nama terpanjang
+const fileNames = Object.keys(configs.logger.fileNames);
 let maxLength = 0;
 
-for (let i = 0, len = fileNames.length; i < len; ++i) {
+for (let i = 0; i < fileNames.length; ++i) {
     if (fileNames[i].length > maxLength) {
         maxLength = fileNames[i].length;
     }
@@ -20,7 +20,7 @@ for (let i = 0, len = fileNames.length; i < len; ++i) {
 maxLength += 4;
 
 // Insialisasi transport dari yang ada di config.js
-for (let i = 0, len = fileNames.length; i < len; ++i) {
+for (let i = 0; i < fileNames.length; ++i) {
     const filePath = resolvePath(
         joinPath(configs.logger.folder, configs.logger.fileNames[fileNames[i]])
     );

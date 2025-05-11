@@ -62,7 +62,7 @@ function createFileOptions(filePath: string) {
         filename: filePath,
         maxsize: 2_097_152, // 2 MB dalam bytes
         maxFiles: 5,
-        handleExceptions: true,
+        handleExceptions: false,
         level: "info",
     };
 }
